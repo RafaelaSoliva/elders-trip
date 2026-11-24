@@ -1,5 +1,5 @@
 import { Modal, StyleSheet, TouchableOpacity, View } from 'react-native';
-import { AppText } from './app-text';
+import { AppText } from '../app-text';
 
 interface AppAlertProps {
     visible: boolean,
