@@ -12,12 +12,22 @@ export function useLocationPermission({
     onPermissionGranted,
 }: Options) {
     const lastGranted = useRef<boolean | null>(null);
-    const callbacks = useRef({ onPermissionLost, onPermissionGranted});
+    const isChecking = useRef(false);
+    const callbacks = useRef({ onPermissionLost, onPermissionGranted });
     callbacks.current = { onPermissionLost, onPermissionGranted };
 
     const check = useCallback(async () => {
+        if(isChecking.current) return;
+        isChecking.current = true;
+
         try {
-            const { status, granted, canAskAgain } = await Location.getForegroundPermissionsAsync();
+            let { status, granted, canAskAgain } = await Location.getForegroundPermissionsAsync();
+
+            if(status === Location.PermissionStatus.UNDETERMINED) {
+                ({ status, granted, canAskAgain } = await Location.requestForegroundPermissionsAsync());
+            }
+
+            if(status === Location.PermissionStatus.UNDETERMINED) return;
 
             if(lastGranted.current === granted) return;
             lastGranted.current = granted;
@@ -29,6 +39,8 @@ export function useLocationPermission({
             }
         } catch (error) {
             console.warn("Não foi possível verificar a permissão de localização", error);
+        } finally {
+            isChecking.current = false;
         }
     }, []);
 
@@ -45,5 +57,5 @@ export function useLocationPermission({
         return () => subscription.remove();
     }, [check]);
 
-    return { recheck: check };
+    return { reCheck: check };
 }

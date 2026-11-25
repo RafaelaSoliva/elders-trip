@@ -17,9 +17,9 @@ export function LocationPermissionAlert() {
             title="Permissão necessária!"
             message="O aplicativo precisa acessar sua localização para continuar"
             confirmText="Configurar"
-            onConfirm={() => Linking.openSettings}
+            onConfirm={() => Linking.openSettings()}
             cancelText="Encerrar"
-            onCancel={() => BackHandler.exitApp}
+            onCancel={() => BackHandler.exitApp()}
         />
     );
 }
