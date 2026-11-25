@@ -62,7 +62,7 @@ const styles = StyleSheet.create ({
     },
     box: {
         height: 235,
-        width: 330,
+        width: 320,
         borderRadius: 15,
         backgroundColor: '#FFFFFF',
         justifyContent: 'space-between',
@@ -70,7 +70,7 @@ const styles = StyleSheet.create ({
     },
     titleContainer: {
         height: 75,
-        marginHorizontal: 20,
+        width: 320,
         borderColor: '#00000060',
         borderBottomWidth: 0.5,
         justifyContent: 'center',
@@ -79,7 +79,8 @@ const styles = StyleSheet.create ({
     messageContainer: {
         flex: 1,
         marginHorizontal: 25,
-        paddingTop: 15,
+        marginBottom: 9,
+        justifyContent: 'center',
         alignItems: 'center',
     },
     buttonContainer: {
