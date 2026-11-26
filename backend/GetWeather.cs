@@ -55,7 +55,7 @@ public class GetWeather
                 return new StatusCodeResult(StatusCodes.Status502BadGateway);
             }
 
-            var result = new WeatherResult(IsDay: data.Current.IsDay == 0, Rain: data.Current.Rain);
+            var result = new WeatherResult(IsDay: data.Current.IsDay == 1, Rain: data.Current.Rain);
 
             return new OkObjectResult(result);
         } 
